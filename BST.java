@@ -120,31 +120,43 @@ class BST{
 		}
 	}
 
+
+	//This is a wrapper method over the delete function
 	public void delete(int data){
 		root =  delete(root, data);
 	}
 
+
+	//The delete function can change the root of the tree. So, it will return the node of the tree from which it is deleting the data
 	public node delete(node root, int data){
+		// If the root is null, then it will simply return null
 		if(root == null){
 			return null;
 		}
 		else if(root.getData() > data){
+			//if the data which is to be deleted is on the left side of BST then we will recursively call delete and set the left of the root returned by that recursive delete function
 			root.setLeft(delete(root.getLeft(), data));
 		}
 		else if(root.getData() < data){
+			//if the data which is to be deleted is on the right side of BST then we will recursively call delete and set the right of the root returned by that recursive delete function
 			root.setRight(delete(root.getRight(), data));
 		}
 		else{
+			// if the data is to be deleted is current data and it has only left child then the new root for the current subtree would be it's left child
 			if(root.getRight() == null){
 				return root.getLeft();
 			}
+			// similarly if the data is to be deleted is current data and it has only right child then the new root for the current subtree would be it's right child
 			if(root.getLeft() == null){
 				return root.getRight();
 			}
+			//if the current node which is to be deleted has both the children then we will find minimum from the right subtree and set that data to current node
 			root.setData(minimum(root.getRight()));
+			//and then call delete recursively on the right side of the subtree to delete the data (minimum) which is copied.
 			root.setRight(delete(root.getRight(), root.getData()));
 		}
 		return root;
+		// ?? what if we can't access the data and just has to delete the node with the pointers???
 	} 
 }
 
