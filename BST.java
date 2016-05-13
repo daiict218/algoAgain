@@ -89,6 +89,30 @@ class BST{
 		}
 	}
 
+	public int minimum(){
+		node r = root;
+		if(r == null){
+			System.out.println("No minimum value");
+			return -1;
+		}
+		while(r.getLeft() != null){
+			r = r.getLeft();
+		}
+		return r.getData();
+	}
+
+	public int maximum(){
+		node r = root;
+		if(r == null){
+			System.out.println("No minimum value");
+			return -1;
+		}
+		while(r.getRight() != null){
+			r = r.getRight();
+		}
+		return r.getData();
+	}
+
 	public void inOrder(node root){
 		if(root!=null)
 		{
@@ -96,6 +120,10 @@ class BST{
 			System.out.print(root.getData()+" ");
 			inOrder(root.getRight());
 		}
+	}
+
+	public node delete(int data){
+		
 	}
 }
 
@@ -116,6 +144,12 @@ class main{
 		System.out.println("Enter the data you want to search");
 		int data = input.nextInt();
 		node x = b.search(data);
-		System.out.println(x.getData());
+		if(x == null){
+			System.out.println("No Data Found");
+		} else {
+			System.out.println(x.getData());
+		}
+		System.out.println(b.minimum());
+		System.out.println(b.maximum());
 	}
 }
