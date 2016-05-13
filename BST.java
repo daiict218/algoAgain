@@ -35,7 +35,7 @@ class node{
 }
 
 class BST{
-	public node root;
+	private node root;
 
 	BST(){
 		this.root = null;
