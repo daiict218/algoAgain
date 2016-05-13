@@ -35,7 +35,7 @@ class node{
 }
 
 class BST{
-	private node root;
+	public node root;
 
 	BST(){
 		this.root = null;
@@ -89,8 +89,7 @@ class BST{
 		}
 	}
 
-	public int minimum(){
-		node r = root;
+	public int minimum(node r){
 		if(r == null){
 			System.out.println("No minimum value");
 			return -1;
@@ -101,8 +100,7 @@ class BST{
 		return r.getData();
 	}
 
-	public int maximum(){
-		node r = root;
+	public int maximum(node r){
 		if(r == null){
 			System.out.println("No minimum value");
 			return -1;
@@ -122,9 +120,32 @@ class BST{
 		}
 	}
 
-	public node delete(int data){
-		
+	public void delete(int data){
+		root =  delete(root, data);
 	}
+
+	public node delete(node root, int data){
+		if(root == null){
+			return null;
+		}
+		else if(root.getData() > data){
+			root.setLeft(delete(root.getLeft(), data));
+		}
+		else if(root.getData() < data){
+			root.setRight(delete(root.getRight(), data));
+		}
+		else{
+			if(root.getRight() == null){
+				return root.getLeft();
+			}
+			if(root.getLeft() == null){
+				return root.getRight();
+			}
+			root.setData(minimum(root.getRight()));
+			root.setRight(delete(root.getRight(), root.getData()));
+		}
+		return root;
+	} 
 }
 
 class main{
@@ -149,7 +170,12 @@ class main{
 		} else {
 			System.out.println(x.getData());
 		}
-		System.out.println(b.minimum());
-		System.out.println(b.maximum());
+		System.out.println(b.minimum(b.root));
+		System.out.println(b.maximum(b.root));
+		System.out.println("Enter the data you want to delete");
+		data = input.nextInt();
+		b.delete(data);
+		System.out.println("Inorder traversal after delete");
+		b.inOrder(b.root);
 	}
 }
