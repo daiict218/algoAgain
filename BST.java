@@ -205,6 +205,14 @@ class BST{
 		}
 		System.out.println();
 	}
+
+	public int height(node r){
+		if(r == null){
+			return -1;
+		} else {
+			return Math.max(height(r.getLeft()) , height(r.getRight())) + 1;
+		}
+	}
 }
 
 class main{
@@ -220,23 +228,25 @@ class main{
 		}
 		System.out.println("Inorder traversal");
 		b.inOrder(b.root);
-		System.out.println();
-		System.out.println("Enter the data you want to search");
-		int data = input.nextInt();
-		node x = b.search(data);
-		if(x == null){
-			System.out.println("No Data Found");
-		} else {
-			System.out.println(x.getData());
-		}
-		System.out.println(b.minimum(b.root));
-		System.out.println(b.maximum(b.root));
-		System.out.println("Enter the data you want to delete");
-		data = input.nextInt();
-		b.delete(data);
-		System.out.println("Inorder traversal after delete");
-		b.inOrderStack(b.root);
-		System.out.println("preOrder traversal after delete");
-		b.preOrderStack(b.root);
+		// System.out.println();
+		// System.out.println("Enter the data you want to search");
+		// int data = input.nextInt();
+		// node x = b.search(data);
+		// if(x == null){
+		// 	System.out.println("No Data Found");
+		// } else {
+		// 	System.out.println(x.getData());
+		// }
+		// System.out.println(b.minimum(b.root));
+		// System.out.println(b.maximum(b.root));
+		// System.out.println("Enter the data you want to delete");
+		// data = input.nextInt();
+		// b.delete(data);
+		// System.out.println("Inorder traversal after delete");
+		// b.inOrderStack(b.root);
+		// System.out.println("preOrder traversal after delete");
+		// b.preOrderStack(b.root);
+		System.out.println("height of the tree is : ");
+		System.out.println(b.height(b.root));
 	}
 }
