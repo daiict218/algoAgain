@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 class node{
 	private node left, right;
 	private int data;
@@ -158,6 +159,52 @@ class BST{
 		return root;
 		// ?? what if we can't access the data and just has to delete the node with the pointers???
 	} 
+
+	public void inOrderStack(node root){
+		node r = root;
+		boolean done = false;
+		Stack<node> s = new Stack<node>();
+		while(!done){
+			if(r != null){
+				s.push(r);
+				r = r.getLeft();
+			}
+			else{
+				if(s.isEmpty()){
+					done = true;
+				}
+				else{
+					node x = s.pop();
+					System.out.print(x.getData()+" ");
+					r = x.getRight();
+				}
+			}
+		}
+		System.out.println();
+	}
+
+	public void preOrderStack(node root){
+		node r = root;
+		boolean done = false;
+		Stack<node> s = new Stack<node>();
+		while(!done){
+			if(r != null){
+				System.out.print(r.getData()+" ");
+				s.push(r);
+				r = r.getLeft();
+			}
+			else{
+				if(s.isEmpty()){
+					done = true;
+				}
+				else{
+					node x = s.pop();
+					r = x.getRight();
+				}
+			}
+		}
+		System.out.println();
+	}
 }
 
 class main{
@@ -188,6 +235,8 @@ class main{
 		data = input.nextInt();
 		b.delete(data);
 		System.out.println("Inorder traversal after delete");
-		b.inOrder(b.root);
+		b.inOrderStack(b.root);
+		System.out.println("preOrder traversal after delete");
+		b.preOrderStack(b.root);
 	}
 }
