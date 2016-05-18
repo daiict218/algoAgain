@@ -93,7 +93,7 @@ class BST{
 
 	public int minimum(node r){
 		if(r == null){
-			System.out.println("No minimum value");
+			System.out.println("No minimum dataue");
 			return -1;
 		}
 		while(r.getLeft() != null){
@@ -104,7 +104,7 @@ class BST{
 
 	public int maximum(node r){
 		if(r == null){
-			System.out.println("No minimum value");
+			System.out.println("No minimum dataue");
 			return -1;
 		}
 		while(r.getRight() != null){
@@ -250,6 +250,48 @@ class BST{
             root.right = temp;
         }
     }
+
+    public ArrayList<ArrayList<Integer>> zigzagLevelOrder(node a) {
+	    Stack<node> s1 = new Stack<node>();
+	    Stack<node> s2 = new Stack<node>();
+	    ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
+	    if(a == null){
+	        return null;
+	    }
+	    s1.push(a);
+	    int level = 0;
+	    while(!s1.isEmpty() || !s2.isEmpty()){
+	        ArrayList<Integer> temp = new ArrayList<Integer>();
+	        if(level%2 == 0){
+	            while(!s1.isEmpty()){
+	                node x = s1.pop();
+	                temp.add(x.data);
+	                if(x.left != null){
+	                    s2.push(x.left);
+	                }
+	                if(x.right != null){
+	                    s2.push(x.right);
+	                }
+	            }
+	        }
+	        if(level%2 != 0){
+	            while(!s2.isEmpty()){
+	                node x = s2.pop();
+	                temp.add(x.data);
+	                if(x.right != null){
+	                    s1.push(x.right);
+	                }
+	                if(x.left != null){
+	                    s1.push(x.left);
+	                }
+	            }
+	        }
+	        System.out.println(temp);
+	        level++;
+	        list.add(temp);
+	    }
+	    return list;
+	}
 }
 
 class main{
@@ -287,6 +329,7 @@ class main{
 		// System.out.println("height of the tree is : ");
 		// System.out.println(b.height(b.root));
 		// System.out.println(b.minDepth(b.root));
-		b.preOrderStack(b.invertTree(b.root));
+		// b.preOrderStack(b.invertTree(b.root));
+		System.out.println(b.zigzagLevelOrder(b.root));
 	}
 }
