@@ -1,8 +1,9 @@
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.*;
 class node{
-	private node left, right;
-	private int data;
+	public node left, right;
+	public int data;
 
 	node(int data){
 		this.data = data;
@@ -183,6 +184,25 @@ class BST{
 		System.out.println();
 	}
 
+	public int minDepth(node a) {
+	    if(a == null){
+	        return 0;
+	    } 
+	    if(a.getLeft() == null && a.getRight() == null){
+	        return 1;
+	    }
+	    if(a.getLeft() == null && a.getRight()!=null){
+	        return minDepth(a.getRight())+1;
+	    }
+	    if(a.getRight() == null && a.getLeft()!=null){
+	        return minDepth(a.getLeft())+1;
+	    }
+	    if(a.getRight() != null && a.getLeft()!=null){
+	        return Math.min(minDepth(a.getLeft()) , minDepth(a.getRight())) + 1;
+	    }
+	    return 0;
+	}
+
 	public void preOrderStack(node root){
 		node r = root;
 		boolean done = false;
@@ -213,6 +233,23 @@ class BST{
 			return Math.max(height(r.getLeft()) , height(r.getRight())) + 1;
 		}
 	}
+
+	public node invertTree(node root){
+		invertTreep(root);
+		return root;
+	}
+
+	public void invertTreep(node root) {
+        if(root == null){
+            return ;
+        } else {
+            invertTreep(root.left);
+            invertTreep(root.right);
+            node temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+        }
+    }
 }
 
 class main{
@@ -228,6 +265,7 @@ class main{
 		}
 		System.out.println("Inorder traversal");
 		b.inOrder(b.root);
+		System.out.println();
 		// System.out.println();
 		// System.out.println("Enter the data you want to search");
 		// int data = input.nextInt();
@@ -246,7 +284,9 @@ class main{
 		// b.inOrderStack(b.root);
 		// System.out.println("preOrder traversal after delete");
 		// b.preOrderStack(b.root);
-		System.out.println("height of the tree is : ");
-		System.out.println(b.height(b.root));
+		// System.out.println("height of the tree is : ");
+		// System.out.println(b.height(b.root));
+		// System.out.println(b.minDepth(b.root));
+		b.preOrderStack(b.invertTree(b.root));
 	}
 }
