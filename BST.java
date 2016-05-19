@@ -286,7 +286,7 @@ class BST{
 	                }
 	            }
 	        }
-	        System.out.println(temp);
+	        // System.out.println(temp);
 	        level++;
 	        list.add(temp);
 	    }
@@ -330,6 +330,6 @@ class main{
 		// System.out.println(b.height(b.root));
 		// System.out.println(b.minDepth(b.root));
 		// b.preOrderStack(b.invertTree(b.root));
-		System.out.println(b.zigzagLevelOrder(b.root));
+		// System.out.println(b.zigzagLevelOrder(b.root));
 	}
 }
